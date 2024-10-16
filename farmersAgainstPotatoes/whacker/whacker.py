@@ -7,9 +7,7 @@ def whacker():
   activeWindow = win32gui.GetWindowText(win32gui.GetForegroundWindow())
   gameWindow = win32gui.FindWindow(None, gameTitle)
   rect = win32gui.GetWindowRect(gameWindow)
-
-  def absPath(imgPath):
-    return str(pathlib.Path(imgPath).resolve())
+  basePath = 'F:/Code_projects/pyScripts/farmersAgainstPotatoes/whacker/'
 
   print("WhackaMoler@1.0.1")
   print('Press ctrl+c to quit.\n')
@@ -31,7 +29,7 @@ def whacker():
 
       if running and win32gui.GetWindowText(win32gui.GetForegroundWindow()) == gameTitle:
         location = pyautogui.locateOnScreen(
-          image=absPath("farmersAgainstPotatoes/whacker/img/eye.png"),
+          image=f"{basePath}img/eye.png",
           confidence=0.8,
           region=rect,
           grayscale=True
