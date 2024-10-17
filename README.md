@@ -1,3 +1,3 @@
-# CMD menu for various automation scripts, mostly games.
+# CMDLine menu GUI for various automation scripts, mostly games.
 
-For the most part fully documented during usage.
+Navigate a menu of categories and scripts belonging to them with a handy GUI to launch them with.
