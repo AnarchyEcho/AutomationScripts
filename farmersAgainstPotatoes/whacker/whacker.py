@@ -1,5 +1,7 @@
 from msvcrt import kbhit, getch
-import pyautogui, keyboard, win32gui, win32com.client, pathlib
+from os.path import dirname, join, abspath
+from dotenv import dotenv_values
+import pyautogui, keyboard, win32gui, win32com.client
 
 def whacker():
   LINE_CLEAR = '\x1b[2K'
@@ -9,7 +11,8 @@ def whacker():
   activeWindow = win32gui.GetWindowText(win32gui.GetForegroundWindow())
   gameWindow = win32gui.FindWindow(None, gameTitle)
   rect = win32gui.GetWindowRect(gameWindow)
-  basePath = 'F:/Code_projects/pyScripts/farmersAgainstPotatoes/whacker/'
+  absoPath = dirname(dirname(dirname(abspath(__file__))))
+  basePath = f'{dotenv_values(join(absoPath, ".env"))["FAPIPATH"]}/whacker/'
 
   print(f'{LINE_CLEAR}Press {startStopKey} to {"PAUSE" if running else "START"}', end='\r')
 
