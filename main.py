@@ -38,7 +38,7 @@ fapiMenu = FapiMenu()
 
 class ScriptMenu(Cmd):
   prompt = '> '
-  intro = f'Select category then script to run\n'
+  intro = 'Select category then script to run'
 
   def do_ngu(self, inp):
     '''Menu for NGUIdle scripts'''
