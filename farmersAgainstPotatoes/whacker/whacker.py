@@ -1,6 +1,8 @@
+from msvcrt import kbhit, getch
 import pyautogui, keyboard, win32gui, win32com.client, pathlib
 
 def whacker():
+  LINE_CLEAR = '\x1b[2K'
   running, isHolding = False, False
   startStopKey = "p"
   gameTitle = 'Farmer Against Potatoes Idle'
@@ -9,20 +11,20 @@ def whacker():
   rect = win32gui.GetWindowRect(gameWindow)
   basePath = 'F:/Code_projects/pyScripts/farmersAgainstPotatoes/whacker/'
 
-  print("WhackaMoler@1.0.1")
-  print('Press ctrl+c to quit.\n')
-  print(f"{startStopKey} - Start / Stop")
-  print("-" * 20)
-  print("🟩 Running" if running else "🛑 Stopped")
+  print(f'{LINE_CLEAR}Press {startStopKey} to {"PAUSE" if running else "START"}', end='\r')
 
   try:
     while True:
+      if kbhit():
+        key = ord(getch())
+        if key == 113:
+          break
+
       activeWindow = win32gui.GetWindowText(win32gui.GetForegroundWindow())
       if keyboard.is_pressed(startStopKey) == True:
+        print(f'{LINE_CLEAR}Press {startStopKey} to {"PAUSE" if running else "START"}', end='\r')
         if isHolding == False:
           isHolding = True
-          print ("\033[A                             \033[A")
-          print("🛑 Stopped" if running else "🟩 Running")
           running = not running
       else:
         isHolding = False
@@ -41,7 +43,7 @@ def whacker():
         win32com.client.Dispatch("WScript.Shell").SendKeys('%')
         win32gui.SetForegroundWindow(gameWindow)
   except KeyboardInterrupt:
-    print(f'Stopped whack-a-moling')
+    print(f'{LINE_CLEAR}', end='\r')
 
 if __name__ == '__main__':
   whacker()

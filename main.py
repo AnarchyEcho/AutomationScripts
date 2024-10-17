@@ -1,25 +1,18 @@
 from msvcrt import kbhit, getch
+import importlib
 import sys
 
-# nguIdle scripts
-from nguIdle.bossSniper.bossSniper import bossSniper
-
-# fapi scripts
-from farmersAgainstPotatoes.whacker.whacker import whacker
-
 LINE_CLEAR = '\x1b[2K'
-pauseKey = 'p'
 scriptDict = {
-  'nguIdle': ['bossSniper', 'test'],
+  'nguIdle': ['bossSniper'],
   'farmersAgainstPotatoes': ['whacker']
 }
 scriptDict_i = list(scriptDict.keys())
 
 def main():
   print('Select category then script to run.', end='\n\r')
-  print('Press Q to exit, or go back to menu from category.', end='\n\n\r')
+  print('Press Q to exit, or go back to menu from category/script.', end='\n\n\r')
 
-  curText = ''
   level = 0
   def newText(arr):
     match level:
@@ -48,14 +41,21 @@ def main():
               selected = 0
               newText(scriptDict[scriptDict_i[prevSelected]])
             case 1:
-              print(f'{LINE_CLEAR}{scriptDict[scriptDict_i[prevSelected]][selected]}', end='\r')
+              category = scriptDict_i[prevSelected]
+              scriptName = scriptDict[category][selected]
+              module = importlib.import_module(
+                f'{category}.{scriptName}.{scriptName}'
+              )
+              func = getattr(module, scriptName)
+              func()
+              newText(scriptDict[scriptDict_i[prevSelected]])
 
         case 75:
           '''Left arrow'''
           match level:
             case 0:
               selected = selected - 1 if selected != 0 else 0
-              newText(scriptDict)
+              newText(scriptDict.keys())
             case 1:
               selected = selected - 1 if selected != 0 else 0
               newText(scriptDict[scriptDict_i[prevSelected]])
