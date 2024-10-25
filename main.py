@@ -15,13 +15,8 @@ def main():
 
   level = 0
   def newText(arr):
-    match level:
-      case 0:
-        curText = '> ' + f''.join(f'{f"[ {key} ]" if i == selected else key} ' for i, key in enumerate(arr))
-        print(f'{LINE_CLEAR}{curText}', end='\r', flush=True)
-      case 1:
-        curText = '>> ' + f''.join(f'{f"[ {key} ]" if i == selected else key} ' for i, key in enumerate(arr))
-        print(f'{LINE_CLEAR}{curText}', end='\r', flush=True)
+    curText = f'{">" * (level + 1)} ' + f''.join(f'{f"[ {key} ]" if i == selected else key} ' for i, key in enumerate(arr))
+    print(f'{LINE_CLEAR}{curText}', end='\r', flush=True)
 
   selected = 0
   prevSelected = selected
