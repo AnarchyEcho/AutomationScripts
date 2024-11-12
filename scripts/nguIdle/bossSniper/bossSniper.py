@@ -6,7 +6,7 @@ import pyautogui, time, keyboard, win32gui
 def bossSniper():
   LINE_CLEAR = '\x1b[2K'
   boss = False
-  absoPath = dirname(dirname(dirname(abspath(__file__))))
+  absoPath = dirname(dirname(dirname(dirname(abspath(__file__)))))
   basePath = f'{dotenv_values(join(absoPath, ".env"))["NGUPATH"]}/bossSniper/'
   print(f'{LINE_CLEAR}Awaiting game.', end='\r', flush=True)
 

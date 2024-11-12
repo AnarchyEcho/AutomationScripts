@@ -39,7 +39,7 @@ def main():
               category = scriptDict_i[prevSelected]
               scriptName = scriptDict[category][selected]
               module = importlib.import_module(
-                f'{category}.{scriptName}.{scriptName}'
+                f'scripts.{category}.{scriptName}.{scriptName}'
               )
               func = getattr(module, scriptName)
               func()
