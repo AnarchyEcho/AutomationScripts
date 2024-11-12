@@ -11,7 +11,7 @@ def whacker():
   activeWindow = win32gui.GetWindowText(win32gui.GetForegroundWindow())
   gameWindow = win32gui.FindWindow(None, gameTitle)
   rect = win32gui.GetWindowRect(gameWindow)
-  absoPath = dirname(dirname(dirname(abspath(__file__))))
+  absoPath = dirname(dirname(dirname(dirname(abspath(__file__)))))
   basePath = f'{dotenv_values(join(absoPath, ".env"))["FAPIPATH"]}/whacker/'
 
   print(f'{LINE_CLEAR}Press {startStopKey} to {"PAUSE" if running else "START"}', end='\r')
