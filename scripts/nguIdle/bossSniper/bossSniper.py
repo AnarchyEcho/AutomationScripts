@@ -29,14 +29,14 @@ def bossSniper():
             continue
 
           try:
-            if pyautogui.locateOnScreen(f'{basePath}img/noenemy.png', region=rect, confidence=0.8) != None:
+            if pyautogui.locateOnScreen(f'{basePath}img/noenemy.png', region=rect, confidence=0.8, grayscale=True) != None:
               boss = False
               print(f'{LINE_CLEAR}Waiting for enemy.', end='\r', flush=True)
           except:
             continue
 
           try:
-            if pyautogui.locateOnScreen(f'{basePath}img/noenemy.png', region=rect, confidence=0.8) == None and not boss:
+            if pyautogui.locateOnScreen(f'{basePath}img/noenemy.png', region=rect, confidence=0.8, grayscale=True) == None and not boss:
               print(f'{LINE_CLEAR}Skipping normal mob.', end='\r', flush=True)
               keyboard.send('left')
               time.sleep(0.1)
